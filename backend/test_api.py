@@ -49,7 +49,23 @@ class APITestCase(unittest.TestCase):
         # json = login_response.json
         # print(json)
         self.assertEqual(status_code, 200)
-            
+    
+    # Test CRUD
+    def test_get_all_recipes(self):
+        pass
+    
+    def test_get_single_recipe(self):
+        pass
+
+    def test_create_recipe(self):
+        pass
+
+    def test_update_recipe(self):
+        pass
+
+    def test_delete_recipe(self):
+        pass
+
     def tearDown(self):
         with self.app.app_context():
             db.session.remove()
