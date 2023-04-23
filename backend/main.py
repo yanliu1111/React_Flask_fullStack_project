@@ -1,9 +1,10 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_restx import Api, Resource, fields
 from config import DevConfig
-from models import Recipe
+from models import Recipe, User
 from exts import db
 from flask_migrate import Migrate # Migration class
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
@@ -21,6 +22,47 @@ recipe_model = api.model('Recipe',
     }
 )
 
+#signup model
+signup_model = api.model('Signup', 
+    {
+    'username':fields.String(),
+    'email':fields.String(),
+    'password':fields.String()
+    }
+)
+
+#login model
+login_model = api.model('Login',
+    {
+    'email':fields.String(),
+    'password':fields.String()
+    }
+)
+@api.route('/signup')
+class Signup(Resource):
+    
+    @api.expect(signup_model)
+    def post(self):
+        data= request.get_json()
+
+        username = data.get('username')
+        db_user = User.query.filter_by(username = username).first()
+        if db_user:
+            return jsonify({"message": f"User with {username} already exists"})   
+       
+        new_user = User(
+            username=data.get('username'),
+            email=data.get('email'),
+            password=generate_password_hash(data.get('password'))
+        )
+        new_user.save()
+        return jsonify({"message": f"User {username} created successfully"})
+
+@api.route('/login')
+class Login(Resource):
+    def post(self):
+        pass
+
 @api.route('/hello')
 class HelloResource(Resource):
     def get(self):
@@ -34,7 +76,9 @@ class RecipeResource(Resource):
         """Get all recipes"""
         recipes = Recipe.query.all()
         return recipes
+    
     @api.marshal_with(recipe_model)
+    @api.expect(recipe_model)
     def post(self):
         """Create a recipe"""
         data = request.get_json()
