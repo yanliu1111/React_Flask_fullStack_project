@@ -7,6 +7,7 @@ from exts import db
 app = Flask(__name__)
 
 app.config.from_object(DevConfig)
+db.init_app(app)
 
 api = Api(app, doc='/docs')
 
