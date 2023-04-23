@@ -12,6 +12,7 @@ def create_app(config):
 
     app.config.from_object(config)
     db.init_app(app)
+    migrate = Migrate(app, db)
     JWTManager(app)
 
     api = Api(app, doc='/docs')
@@ -20,7 +21,7 @@ def create_app(config):
 
     @app.shell_context_processor
     def make_shell_context():
-        return {'db': db, 'Recipe': Recipe , 'User': User}
+        return {'db': db, 'Recipe': Recipe , 'user': User}
 
     return app
 
