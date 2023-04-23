@@ -31,6 +31,24 @@ class APITestCase(unittest.TestCase):
         )
         status_code = signup_response.status_code
         self.assertEqual(status_code, 201)
+    
+    def test_login(self):
+        signup_response = self.client.post("/auth/signup",
+            json={
+            'username': "testuser",
+            "email":"test@test.com",
+            "password": "test@test"}
+        )
+
+        login_response = self.client.post("/auth/login",
+            json={
+            'username': "testuser",
+            "password": "test@test"}
+        )
+        status_code = login_response.status_code
+        # json = login_response.json
+        # print(json)
+        self.assertEqual(status_code, 200)
             
     def tearDown(self):
         with self.app.app_context():
