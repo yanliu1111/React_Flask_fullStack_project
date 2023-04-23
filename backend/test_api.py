@@ -63,7 +63,29 @@ class APITestCase(unittest.TestCase):
         self.assertEqual(status_code, 404)
 
     def test_create_recipe(self):
-        pass
+        signup_response = self.client.post("/auth/signup",
+            json={
+            'username': "testuser",
+            "email":"test@test.com",
+            "password": "test@test"}
+        )
+
+        login_response = self.client.post("/auth/login",
+            json={
+            'username': "testuser",
+            "password": "test@test"}
+        )
+        #print (login_response.json['access_token'])
+        access_token = login_response.json["access_token"]
+
+        create_recipe_response = self.client.post(
+            "/recipe/recipes",
+            json={"title": "Test Noodle", "description": "Test Noodle description"},
+            headers={"Authorization": f"Bearer {access_token}"},
+        )
+
+        status_code = create_recipe_response.status_code
+        self.assertEqual(status_code, 201)
 
     def test_update_recipe(self):
         pass
