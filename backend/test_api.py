@@ -52,10 +52,15 @@ class APITestCase(unittest.TestCase):
     
     # Test CRUD
     def test_get_all_recipes(self):
-        pass
+        response = self.client.get("/recipe/recipes")
+        status_code = response.status_code
+        self.assertEqual(status_code, 200)
     
     def test_get_single_recipe(self):
-        pass
+        id=1
+        response = self.client.get(f"/recipe/recipes/{id}")
+        status_code = response.status_code
+        self.assertEqual(status_code, 404)
 
     def test_create_recipe(self):
         pass
