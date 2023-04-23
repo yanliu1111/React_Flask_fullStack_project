@@ -52,11 +52,14 @@ class RecipeResource(Resource):
         recipe= Recipe.query.get_or_404(id)
         return recipe
     
+    @api.marshal_with(recipe_model)
     def put(self, id):
-        """
-        Update a recipe by id
-        """
-        pass
+        """Update a recipe by id"""
+        recipe_to_update = Recipe.query.get_or_404(id)
+        data = request.get_json()
+        recipe_to_update.update(data.get('title'), data.get('description'))
+        return recipe_to_update
+
     def delete(self, id):
         """
         Delete a recipe by id
