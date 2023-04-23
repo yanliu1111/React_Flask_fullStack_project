@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_restx import Api, Resource, fields
 from config import DevConfig
 from models import Recipe
@@ -33,12 +33,16 @@ class RecipeResource(Resource):
         """Get all recipes"""
         recipes = Recipe.query.all()
         return recipes
-
+    @api.marshal_with(recipe_model)
     def post(self):
-        """
-        Create a recipe
-        """
-        pass
+        """Create a recipe"""
+        data = request.get_json()
+        new_recipe = Recipe(
+            title= data.get('title'),
+            description= data.get('description')
+        )
+        new_recipe.save()
+        return new_recipe, 201
 
 @api.route('/recipes/<int:id>')
 class RecipeResource(Resource):
