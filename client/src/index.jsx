@@ -1,9 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import { createRoot } from "react-dom/client";
-import Navbarr from "./components/Navbar";
+import NavBarr from "./components/Navbar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./components/Home";
+import SignUpPage from "./components/Signup";
+import LoginPage from "./components/Login";
+import CreateRecipePage from "./components/CreateRecipe";
 
-// eslint-disable-next-line react-refresh/only-export-components
+// 1st api call test
 const App = () => {
   // useEffect(() => {
   //   fetch("/api/recipe/hello")
@@ -17,9 +22,17 @@ const App = () => {
   // const [message, setMessage] = useState("");
 
   return (
-    <div className="container">
-      <Navbarr />
-    </div>
+    <Router>
+      <div className="container">
+        <NavBarr />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/create_recipe" element={<CreateRecipePage />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
