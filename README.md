@@ -18,8 +18,8 @@ The project is a simple recipe app that allows simple CRUD actions against a Fla
 
 ### Frontend
 
-- Creating ReactJS App with Vite
-- Creating React Components
-- React Hooks
+- Creating ReactJS App with Vite ✅
+- Creating React Components ✅
+- React Hooks ✅
 - JWT Authentication on the frontend
 - Making API Calls with Fetch API
