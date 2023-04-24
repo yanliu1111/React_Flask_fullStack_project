@@ -85,13 +85,57 @@ class APITestCase(unittest.TestCase):
         )
 
         status_code = create_recipe_response.status_code
+    
         self.assertEqual(status_code, 201)
 
     def test_update_recipe(self):
-        pass
+        signup_response = self.client.post(
+            "/auth/signup",
+            json={
+                "username": "testuser",
+                "email": "testuser@test.com",
+                "password": "password",
+            },
+        )
+
+        login_response = self.client.post(
+            "auth/login", json={"username": "testuser", "password": "password"}
+        )
+
+        access_token = login_response.json["access_token"]
+        create_recipe_response = self.client.post(
+            "/recipe/recipes",
+            json={"title": "Test Noodle", "description": "Test Noodle description"},
+            headers={"Authorization": f"Bearer {access_token}"},
+        )
+
+        status_code = create_recipe_response.status_code
+        id = 1
+        # print (create_recipe_response.json)
+        update_response = self.client.put(
+            f"/recipe/recipe/{id}",
+            json={"title": "Test Noodle update", "description": "Test Noodle update description"},
+            headers={"Authorization": f"Bearer {access_token}"},
+        )
+        # print (update_response.json)
+        status_code = update_response.status_code
+        self.assertEqual(status_code, 200)
 
     def test_delete_recipe(self):
-        pass
+        signup_response = self.client.post(
+            "/auth/signup",
+            json={
+                "username": "testuser",
+                "email": "testuser@test.com",
+                "password": "password",
+            },
+        )
+
+        login_response = self.client.post(
+            "auth/login", json={"username": "testuser", "password": "password"}
+        )
+
+        access_token = login_response.json["access_token"]
 
     def tearDown(self):
         with self.app.app_context():
