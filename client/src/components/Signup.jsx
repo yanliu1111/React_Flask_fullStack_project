@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Navbar } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const SignUpPage = () => {
   const [username, setUsername] = useState("");
@@ -19,7 +20,7 @@ const SignUpPage = () => {
   return (
     <div className="container">
       <div className="form">
-        <h1 className="heading">Sign Up</h1>
+        <h1 className="heading">Sign Up Page</h1>
         <form action="">
           <Form.Group>
             <Form.Label>Username</Form.Label>
@@ -75,6 +76,9 @@ const SignUpPage = () => {
               Submit
             </Button>
           </Form.Group>
+          <Navbar.Text>
+            Already have an account? <a href="login">Login</a>
+          </Navbar.Text>
         </form>
       </div>
     </div>
