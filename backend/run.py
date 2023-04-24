@@ -3,4 +3,4 @@ from config import DevConfig
 
 if __name__ == '__main__':
     app = create_app(DevConfig)
-    app.run()
+    app.run(host="localhost", port=8000, debug=True)
