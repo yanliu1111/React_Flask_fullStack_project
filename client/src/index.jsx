@@ -6,7 +6,11 @@ const App = () => {
   useEffect(() => {
     fetch("/api/recipe/hello")
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        setMessage(data.hello);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   const [message, setMessage] = useState("");
