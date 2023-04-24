@@ -76,6 +76,7 @@ const SignUpPage = () => {
               Submit
             </Button>
           </Form.Group>
+          <br />
           <Navbar.Text>
             Already have an account? <a href="login">Login</a>
           </Navbar.Text>

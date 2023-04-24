@@ -8,6 +8,8 @@ const LoginPage = () => {
 
   const loginUser = () => {
     console.log(username, password);
+    setUsername("");
+    setPassowrd("");
   };
 
   return (
@@ -49,8 +51,9 @@ const LoginPage = () => {
               Login
             </Button>
           </Form.Group>
+          <br />
           <Navbar.Text>
-            Don't have Account? <a href="signup">Sign Up</a>
+            Do not have Account? <a href="signup">Sign Up</a>
           </Navbar.Text>
         </form>
       </div>
