@@ -10,11 +10,11 @@ The project is a simple recipe app that allows simple CRUD actions against a Fla
 
 ### Backend
 
-- Creating REST APIs with Flask with Flask-RestX
-- Using Flask-SQLAlchemy ORM
-- Carrying Out Database Migrations with Flask-Migrate
-- JWT Authentication with Flask-JWT-Extended
-- Testing Flask API with Unittest
+- Creating REST APIs with Flask with Flask-RestX ✅
+- Using Flask-SQLAlchemy ORM ✅
+- Carrying Out Database Migrations with Flask-Migrate ✅
+- JWT Authentication with Flask-JWT-Extended ✅
+- Testing Flask API with Unittest ✅
 
 ### Frontend
 
