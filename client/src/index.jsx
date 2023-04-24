@@ -7,6 +7,7 @@ import HomePage from "./components/Home";
 import SignUpPage from "./components/Signup";
 import LoginPage from "./components/Login";
 import CreateRecipePage from "./components/CreateRecipe";
+import "./styles/main.css";
 
 // 1st api call test
 const App = () => {
@@ -23,7 +24,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="container">
+      <div className="">
         <NavBarr />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -36,4 +37,6 @@ const App = () => {
   );
 };
 
-createRoot(document.getElementById("root")).render(<App />);
+<roots className="render">
+  {createRoot(document.getElementById("root")).render(<App />)}
+</roots>;
