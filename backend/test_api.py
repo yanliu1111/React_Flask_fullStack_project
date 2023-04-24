@@ -137,6 +137,23 @@ class APITestCase(unittest.TestCase):
 
         access_token = login_response.json["access_token"]
 
+        create_recipe_response = self.client.post(
+            "/recipe/recipes",
+            json={"title": "Test Noodle", "description": "Test Noodle description"},
+            headers={"Authorization": f"Bearer {access_token}"},
+        )
+        id = 1
+        delete_response = self.client.delete(
+            f"/recipe/recipe/{id}", headers={"Authorization": f"Bearer {access_token}"}
+        )
+
+        status_code = delete_response.status_code
+
+        print(delete_response.json)
+
+        self.assertEqual(status_code, 200)
+
+
     def tearDown(self):
         with self.app.app_context():
             db.session.remove()
