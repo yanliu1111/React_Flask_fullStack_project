@@ -34,16 +34,19 @@ const SignUpPage = () => {
               {...register("username", { required: true, maxLength: 25 })}
             />
           </Form.Group>
+          <br></br>
           {errors.username && (
-            <span style={{ color: "red" }}>Username is required</span>
+            <p style={{ color: "red" }}>
+              <small>Username is required</small>
+            </p>
           )}
-          <br />
+
           {errors.username?.type == "maxLength" && (
-            <span style={{ color: "red" }}>
-              Username cannot exceed 25 characters
-            </span>
+            <p style={{ color: "red" }}>
+              <small>Username cannot exceed 25 characters</small>
+            </p>
           )}
-          <br />
+
           <Form.Group>
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -56,14 +59,19 @@ const SignUpPage = () => {
               })}
             />
           </Form.Group>
+          <br></br>
           {errors.email && (
-            <span style={{ color: "red" }}>Email is required</span>
+            <p style={{ color: "red" }}>
+              <small>Email is required</small>
+            </p>
           )}
-          <br />
+
           {errors.email?.type == "pattern" && (
-            <span style={{ color: "red" }}>Email is invalid</span>
+            <p style={{ color: "red" }}>
+              <small>Email is invalid</small>
+            </p>
           )}
-          <br />
+
           <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control
@@ -72,16 +80,18 @@ const SignUpPage = () => {
               {...register("password", { required: true, minLength: 6 })}
             />
           </Form.Group>
+          <br></br>
           {errors.password?.type == "required" && (
-            <span style={{ color: "red" }}>Password is required</span>
+            <p style={{ color: "red" }}>
+              <small>Password is required</small>
+            </p>
           )}
-          <br />
+
           {errors.password?.type == "minLength" && (
-            <span style={{ color: "red" }}>
-              Password must be at least 6 characters
-            </span>
+            <p style={{ color: "red" }}>
+              <small>Password must be at least 6 characters</small>
+            </p>
           )}
-          <br />
 
           <Form.Group>
             <Form.Label>Confirm Password</Form.Label>
@@ -95,10 +105,13 @@ const SignUpPage = () => {
               })}
             />
           </Form.Group>
+          <br></br>
           {errors.confirmPassword && (
-            <span style={{ color: "red" }}>Password does not match</span>
+            <p style={{ color: "red" }}>
+              <small>Password does not match</small>
+            </p>
           )}
-          <br />
+
           <Form.Group>
             <Button
               as="sub"
@@ -109,7 +122,7 @@ const SignUpPage = () => {
               Submit
             </Button>
           </Form.Group>
-          <br />
+          <br></br>
           <Navbar.Text>
             Already have an account? <a href="login">Login</a>
           </Navbar.Text>
