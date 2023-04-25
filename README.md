@@ -22,6 +22,7 @@ The project is a simple recipe app that allows simple CRUD actions against a Fla
 - React Hooks ✅
 - React Bootstrap ✅
 - React Router ✅
+- React Hook Form ✅
 - Creating React Components ✅
 - JWT Authentication on the frontend
 - Making API Calls with Fetch API
