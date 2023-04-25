@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Navbar } from "react-bootstrap";
+import { Form, Button, Navbar, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 const SignUpPage = () => {
@@ -10,7 +10,8 @@ const SignUpPage = () => {
     reset,
     formState: { errors },
   } = useForm();
-
+  const [show, setShow] = useState(true);
+  const [serverResponse, setServerResponse] = useState("");
   const submitForm = (data) => {
     // console.log(data);
 
@@ -27,7 +28,11 @@ const SignUpPage = () => {
       };
       fetch("/api/auth/signup", requestOptions)
         .then((res) => res.json())
-        .then((data) => console.log(data))
+        .then((data) => {
+          setServerResponse(data.message);
+          console.log(serverResponse);
+          setShow(true);
+        })
         .catch((err) => console.log(err));
       reset();
     } else {
@@ -43,7 +48,16 @@ const SignUpPage = () => {
   return (
     <div className="container">
       <div className="form">
-        <h1 className="heading">Sign Up Page</h1>
+        {show ? (
+          <>
+            <Alert variant="success" onClose={() => setShow(false)} dismissible>
+              <p>{serverResponse} </p>
+            </Alert>
+            <h1 className="heading">Sign Up Page</h1>
+          </>
+        ) : (
+          <h1 className="heading">Sign Up Page</h1>
+        )}
         <form action="">
           <Form.Group>
             <Form.Label>Username</Form.Label>
