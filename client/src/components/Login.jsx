@@ -1,14 +1,30 @@
 import React, { useState } from "react";
 import { Form, Button, Navbar } from "react-bootstrap";
-
+import { useForm } from "react-hook-form";
 const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassowrd] = useState("");
+  const {
+    register,
+    handleSubmit,
 
-  const loginUser = () => {
-    console.log(username, password);
-    setUsername("");
-    setPassowrd("");
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const loginUser = (data) => {
+    console.log(data);
+    const requestOptions = {
+      method: "POST",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify(data),
+    };
+    fetch("/api/auth/login", requestOptions)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log(data.message);
+      });
+
+    reset();
   };
 
   return (
@@ -21,23 +37,33 @@ const LoginPage = () => {
             <Form.Control
               type="text"
               placeholder="Enter Username"
-              value={username}
-              name="username"
-              onChange={(e) => setUsername(e.target.value)}
+              {...register("username", { required: true, maxLength: 25 })}
             />
           </Form.Group>
-
+          {errors.username && errors.username.type === "required" && (
+            <p style={{ color: "red" }} className="error">
+              <small>Username is required</small>
+            </p>
+          )}
+          {errors.username?.type === "maxLength" && (
+            <p style={{ color: "red" }}>
+              <small>Username should be less than 25 characters</small>
+            </p>
+          )}
           <br />
           <Form.Group>
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="Enter Password"
-              value={password}
-              name="password"
-              onChange={(e) => setPassowrd(e.target.value)}
+              {...register("password", { required: true, minLength: 6 })}
             />
           </Form.Group>
+          {errors.password && errors.password.type === "required" && (
+            <p style={{ color: "red" }} className="error">
+              <small>Password is required</small>
+            </p>
+          )}
 
           <br />
           <Form.Group>
@@ -45,7 +71,7 @@ const LoginPage = () => {
               as="sub"
               variant="primary"
               type="submit"
-              onClick={loginUser}
+              onClick={handleSubmit(loginUser)}
             >
               Login
             </Button>
