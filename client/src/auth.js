@@ -1,6 +1,8 @@
-import { createAsyncAuthProvider } from "react-async-auth";
-export const [useAuth, authFetch, login, logout] = createAsyncAuthProvider({
-  accessTokenKey: "access_token",
+import { createAuthProvider } from "react-token-auth";
+
+export const { useAuth, authFetch, login, logout } = createAuthProvider({
+  getAccessToken: "access_token",
+  storage: localStorage,
   onUpdateToken: (token) =>
     fetch("/api/auth/refresh", {
       method: "POST",

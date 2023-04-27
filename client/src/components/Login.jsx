@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Navbar } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+
 const LoginPage = () => {
   const {
     register,
@@ -21,8 +22,8 @@ const LoginPage = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        console.log(data.message);
-      });
+      })
+      .catch((err) => console.log(err));
 
     reset();
   };
@@ -40,16 +41,17 @@ const LoginPage = () => {
               {...register("username", { required: true, maxLength: 25 })}
             />
           </Form.Group>
-          {errors.username && errors.username.type === "required" && (
-            <p style={{ color: "red" }} className="error">
+          {errors.username && (
+            <p style={{ color: "red" }}>
               <small>Username is required</small>
             </p>
           )}
           {errors.username?.type === "maxLength" && (
             <p style={{ color: "red" }}>
-              <small>Username should be less than 25 characters</small>
+              <small>Username should be 25 characters</small>
             </p>
           )}
+          <br></br>
           <br />
           <Form.Group>
             <Form.Label>Password</Form.Label>
@@ -59,13 +61,17 @@ const LoginPage = () => {
               {...register("password", { required: true, minLength: 6 })}
             />
           </Form.Group>
-          {errors.password && errors.password.type === "required" && (
-            <p style={{ color: "red" }} className="error">
+          {errors.username && (
+            <p style={{ color: "red" }}>
               <small>Password is required</small>
             </p>
           )}
-
-          <br />
+          {errors.password?.type === "maxLength" && (
+            <p style={{ color: "red" }}>
+              <small>Password should be more than 8 characters</small>
+            </p>
+          )}
+          <br></br>
           <Form.Group>
             <Button
               as="sub"
