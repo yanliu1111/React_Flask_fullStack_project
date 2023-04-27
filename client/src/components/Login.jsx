@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Form, Button, Navbar } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { login } from "../auth";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const navigateTo = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -21,7 +25,9 @@ const LoginPage = () => {
     fetch("/api/auth/login", requestOptions)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log(data.access_token);
+        login(data.access_token);
+        navigateTo("/");
       })
       .catch((err) => console.log(err));
 

@@ -24,6 +24,6 @@ The project is a simple recipe app that allows simple CRUD actions against a Fla
 - React Router ✅
 - React Hook Form ✅
 - Creating React Components ✅
-- JWT Authentication on the frontend <br>
+- JWT Authentication on the frontend ✅<br>
   reference: [react-token-auth](https://github.com/obabichev/react-token-auth)
 - Making API Calls with Fetch API
