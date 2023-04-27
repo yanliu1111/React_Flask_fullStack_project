@@ -1,8 +1,7 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
+import { useAuth, logout } from "../auth";
+
 const LoggedInLinks = () => {
   return (
     <>
@@ -53,7 +52,9 @@ const LoggedOutLinks = () => {
   );
 };
 
-const NavBarr = () => {
+const NavBar = () => {
+  const [logged] = useAuth();
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <div className="container-fluid">
@@ -71,34 +72,14 @@ const NavBarr = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/">
-            Home
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/signup">
-            Sign Up
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/login">
-            Login
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/create_recipe">
-            Create Recipes
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link active" to="/">
-            Sign Out
-          </Link>
-        </li>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            {logged ? <LoggedInLinks /> : <LoggedOutLinks />}
+          </ul>
+        </div>
       </div>
     </nav>
   );
 };
 
-export default NavBarr;
+export default NavBar;
