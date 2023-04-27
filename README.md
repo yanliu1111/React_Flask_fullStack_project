@@ -1,12 +1,14 @@
 # Build a Full stack web app with Flask and ReactJS
 
+Base on the
 🎥 Video Course from Youtuber👍 [Ssali Jonathan](https://www.youtube.com/playlist?list=PLEt8Tae2spYkfEYQnKxQ4vrOULAnMI1iF)
+**Add** some new features and hooks from React.dev
 
 ## Project Description
 
 The project is a simple recipe app that allows simple CRUD actions against a Flask REST API.
 
-## Technologies
+## Technologies and Processing ⏳
 
 ### Backend
 
@@ -26,4 +28,7 @@ The project is a simple recipe app that allows simple CRUD actions against a Fla
 - Creating React Components ✅
 - JWT Authentication on the frontend ✅<br>
   reference: [react-token-auth](https://github.com/obabichev/react-token-auth)
-- Making API Calls with Fetch API
+- Making API Calls with Fetch API ✅
+- Sqlite to Postgres Migration 🤔
+- Dockerizing the App
+- Deploying the App
