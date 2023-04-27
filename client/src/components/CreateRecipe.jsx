@@ -11,6 +11,22 @@ const CreateRecipePage = () => {
 
   const createRecipe = (data) => {
     console.log(data);
+    const token = localStorage.getItem("REACT_TOKEN_AUTH_KEY");
+    console.log(token);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+      body: JSON.stringify(data),
+    };
+    fetch("/api/recipe/recipes", requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+    reset();
   };
 
   return (
