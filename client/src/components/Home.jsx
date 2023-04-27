@@ -60,6 +60,34 @@ const LoggedInHome = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  const getAllRecipes = () => {
+    fetch("/api/recipe/recipes")
+      .then((res) => res.json())
+      .then((data) => {
+        setRecipes(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const deleteRecipe = (id) => {
+    let token = localStorage.getItem("REACT_TOKEN_AUTH_KEY");
+    const requestOptions = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+    };
+    fetch(`/api/recipe/recipe/${id}`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        getAllRecipes();
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="container">
       <Modal show={show} size="lg" onHide={closeModal}>
@@ -126,6 +154,9 @@ const LoggedInHome = () => {
           description={recipe.description}
           onClick={() => showModal(recipe.id)}
           // ihavequestion
+          onDelete={() => {
+            deleteRecipe(recipe.id);
+          }}
         />
       ))}
     </div>
