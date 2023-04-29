@@ -1,86 +1,48 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import { LinkContainer } from "react-router-bootstrap";
 import { useAuth, logout } from "../auth";
 
-const LoggedInLinks = () => {
-  return (
-    <>
-      <li className="nav-item">
-        <Link className="nav-link active" to="/">
-          Home
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link  active" to="/create_recipe">
-          Create Recipes
-        </Link>
-      </li>
-      <li className="nav-item">
-        <a
-          className="nav-link active"
-          href="#"
-          // ihavequestion
-          onClick={() => {
-            logout();
-          }}
-        >
-          Log Out
-        </a>
-      </li>
-    </>
-  );
-};
-
-const LoggedOutLinks = () => {
-  return (
-    <>
-      <li className="nav-item">
-        <Link className="nav-link active" to="/">
-          Home
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link active" to="/signup">
-          Sign Up
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link active" to="/login">
-          Login
-        </Link>
-      </li>
-    </>
-  );
-};
-
-const NavBar = () => {
+function NavBar() {
   const [logged] = useAuth();
-
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          Recipes
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            {logged ? <LoggedInLinks /> : <LoggedOutLinks />}
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <Navbar bg="light" expand="md">
+      <Container>
+        <LinkContainer to="/">
+          <Navbar.Brand>Secret Recipes</Navbar.Brand>
+        </LinkContainer>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <LinkContainer to="/">
+              <Nav.Link>Home</Nav.Link>
+            </LinkContainer>{" "}
+            {logged && (
+              <>
+                <LinkContainer to="/create_recipe">
+                  <Nav.Link>Create Recipes</Nav.Link>
+                </LinkContainer>
+
+                <Nav.Link onClick={logout}>Logout</Nav.Link>
+              </>
+            )}
+            {!logged && (
+              <>
+                <LinkContainer to="/signup">
+                  <Nav.Link>SignUp</Nav.Link>
+                </LinkContainer>
+
+                <LinkContainer to="/login">
+                  <Nav.Link>Login</Nav.Link>
+                </LinkContainer>
+              </>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
-};
+}
 
 export default NavBar;
