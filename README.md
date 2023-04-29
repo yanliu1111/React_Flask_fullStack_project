@@ -29,6 +29,8 @@ The project is a simple recipe app that allows simple CRUD actions against a Fla
 - JWT Authentication on the frontend ✅<br>
   reference: [react-token-auth](https://github.com/obabichev/react-token-auth)
 - Making API Calls with Fetch API ✅
-- Sqlite to Postgres Migration 🤔
 - Dockerizing the App
+  - Flask image build ✅
+  - Postgres image build
+  - Sqlite to Postgres Migration 🤔
 - Deploying the App
