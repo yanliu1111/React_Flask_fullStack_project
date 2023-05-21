@@ -2,7 +2,7 @@
 
 Base on the
 🎥 Video Course from Youtuber👍 [Ssali Jonathan](https://www.youtube.com/playlist?list=PLEt8Tae2spYkfEYQnKxQ4vrOULAnMI1iF) <br>
-**What the differences from this one** 👉 Some new features and hooks from React.dev, also complie backend and postgres with Docker and deploy...
+**What the differences from this one** 👉 Some new features and hooks from React.dev, also complie backend and postgres with Docker🐳🐋 and deploy...
 
 ## Project Description
 
